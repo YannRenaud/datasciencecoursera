@@ -53,15 +53,25 @@ Prévoir environ le double de RAM par rapport à la taille du fichier
 Les [ retournent un sous ensemble (un ou plusieurs éléments) de même classe que l'original. NB : l'index démarre à 1 
 On peut spécifier un index, une plage d'index ou une condition logique (x[ x > "a" ]) 
 
-> > x <- c("a", "b", "c", "c", "d", "a") <br/>
-> > u <- x > "a" <br/>
-> > u <br/>
-[1] FALSE  TRUE  TRUE  TRUE  TRUE FALSE <br/>
-> > x[u] <br/>
-[1] "b" "c" "c" "d" <br/>
-> > <br/>
+> x <- c("a", "b", "c", "c", "d", "a") <br/>
+> u <- x > "a" <br/>
+> u <br/>
+> [1] FALSE  TRUE  TRUE  TRUE  TRUE FALSE <br/>
+> x[u] <br/>
+> [1] "b" "c" "c" "d" <br/>
+> <br/>
 <br/>
 
-
 Les [[ retournent un élément seul.
+On peut utiliser une variable contenant le nom de l'attribut à extraire dans les [[
+> x <- list(a=list(10,12,14), b=c(3.14, 2.81))
+> x[[c(1,3)]]
+> [1] 14
+> x[[1]][[3]]
+> [1] 14
+> x[[c(2,1)]]
+> [1] 3.14
+> 
+
+<br/>
 Le $ est utilisé pour extraire des éléments à partir de leur nom.
