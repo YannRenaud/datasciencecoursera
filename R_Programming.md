@@ -64,14 +64,14 @@ On peut spécifier un index, une plage d'index ou une condition logique (x[ x > 
 
 Les [[ retournent un élément seul.
 On peut utiliser une variable contenant le nom de l'attribut à extraire dans les [[
-> x <- list(a=list(10,12,14), b=c(3.14, 2.81))
-> x[[c(1,3)]]
-> [1] 14
-> x[[1]][[3]]
-> [1] 14
-> x[[c(2,1)]]
-> [1] 3.14
-> 
+> x <- list(a=list(10,12,14), b=c(3.14, 2.81)) <br/>
+> x[[c(1,3)]] <br/>
+> [1] 14 <br/>
+> x[[1]][[3]] <br/>
+> [1] 14 <br/>
+> x[[c(2,1)]] <br/>
+> [1] 3.14 <br/>
+>  <br/>
 
 <br/>
 Le $ est utilisé pour extraire des éléments à partir de leur nom.
