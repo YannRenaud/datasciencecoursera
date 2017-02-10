@@ -75,3 +75,25 @@ On peut utiliser une variable contenant le nom de l'attribut à extraire dans le
 
 <br/>
 Le $ est utilisé pour extraire des éléments à partir de leur nom.
+
+Par défaut, quand on sélectionne un seul élément d'une matrice, ça retourne un vecteur (au lieu d'une matrice 1x1). Pour empecher ce comportement, il faut utiliser l'option drop = FALSE)
+
+Recherche approximative à partir des noms => exact = FALSE
+
+Supprimer les valeurs vides 
+> x <- c(1, 2, 3, NA, 4, NA, 5) <br/>
+> bad <- is.na(x) <br/>
+> x[!bad] <br/>
+> [1] 1 2 3 4 5 <br/>
+>  <br/>
+
+> x <- c(1, 2, 3, NA, 4, NA, 5) <br/>
+> bad <- is.na(x) <br/>
+> bad <br/>
+> [1] FALSE FALSE FALSE  TRUE FALSE  TRUE FALSE <br/>
+> x[!bad] <br/>
+> [1] 1 2 3 4 5 <br/>
+>  <br/>
+
+complete.case fonctionne aussi avec des matrices dans ce cas, utiliser la syntaxe :
+x[good,][1:6,]
