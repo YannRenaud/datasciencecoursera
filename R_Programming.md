@@ -97,3 +97,32 @@ Supprimer les valeurs vides
 
 complete.case fonctionne aussi avec des matrices dans ce cas, utiliser la syntaxe :
 x[good,][1:6,]
+
+
+
+
+
+Ressources :
+
+https://github.com/rdpeng/practice_assignment/blob/master/practice_assignment.rmd
+
+
+Boucles for
+
+> x <- c("a", "b", "c", "d")
+> for (i in 1:4) {
+>     print(x[i])
+> }
+>
+> for (i in seq_along(x)){
+>     print(x[i])
+> }
+>
+> for (letter in x){
+>     print(letter)
+> }
+>
+
+## Les fonctions
+
+Dans R, les fonctions retournent la valeur de la dernière expression.
