@@ -126,3 +126,37 @@ Boucles for
 ## Les fonctions
 
 Dans R, les fonctions retournent la valeur de la dernière expression.
+Les fonctions sont des objets. Elles peuvent donc être passées en argument d'autres fonctions.
+Si on surcharge une fonction, R recherche en premier dans l'environnement global (le workspace) donc l'utilise. Si on veut la fonction d'un package particulier, l faut le préciser. La fonction search() indique l'ordre de recherche des objets.
+Closure = fonction + environnement d'exécution
+Free variables => variables d'environnement (qui peuvent être utilisées à l'interieure de fonction).
+Ceci implique qu'une fonction peut retourner des résultats différents en fonction de l'environnement dans lequel elle est exécutée.
+C'est également très intéressant quand on définie des fonctions à l'interieur d'autres fonctions (dans ce cas, la fonction "mère" est l'environnement de la fonction "fille").
+Pour explorer l'environnement d'une fonction, on utilise la fonction ls(environnement(_function_))
+
+Lexical scoping => les free variables prennent les valeurs du contexte dans lequel la fonction est définie
+Dynamic scoping => les free variables prennent les valeurs du contexte dans lequel la fonction est appelée
+
+R utilise le lexical scoping.
+
+## Dates / Times
+Les dates sont représentées par la class date
+Les timestamp sont représentés par les classe POSIXct et POSIXlt
+Les dates sont des nombres de jours depuis 01/01/1970
+Les timestamps des nombres de secondes depuis 01/01/1970
+La classe POSIXlt comporte bcp d'informations en plus du nombre de secondes depuis le 01/01/1970 (jour, mois, année, semaine etc...). Ces objets sont représentés par les listes d'éléments
+
+> x = Sys.time()
+> x
+>[1] "2017-02-12 23:07:54 CET"
+> p <- as.POSIXlt(x)
+> names(unclass(p))
+> [1] "sec"    "min"    "hour"   "mday"   "mon"    "year"   "wday"   "yday"   "isdst"  "zone"   "gmtoff"
+> p$sec
+>[1] 54.27441
+> p$min
+>[1] 7
+> 
+
+
+La fonction strptime convertie des strings en date
