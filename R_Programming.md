@@ -185,6 +185,12 @@ lapply(s, function(x) colMeans(x, [ , c("Ozone", "Solar Radiation")]))
 On peut splitter sur plusieurs niveaux en passant une list en argument à la place d'une valeur.
 Split appele automatiqueemnt la fonction "interaction" qui combine les éléments de différentes listes
 
+Exemples :
+calcul de la moyenne d'une valeur regrouper sur une autre. Avec le jeu de données MTCAR, conso moyenne par cylindrée :
+tapply(mtcars$mpg, mtcars$cyl, mean)
+with(mtcars, tapply(mpg, cyl, mean))
+sapply(split(mtcars$mpg, mtcars$cyl), mean)
+
 ## Debugging
 
 traceback : print the call stack function
