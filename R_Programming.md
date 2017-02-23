@@ -160,3 +160,35 @@ La classe POSIXlt comporte bcp d'informations en plus du nombre de secondes depu
 
 
 La fonction strptime convertie des strings en date
+
+## Les fonctions Apply
+
+* lapply : applique une fonction sur une liste d'élément (X : list, F : function , ...) 
+si X n'est pas une liste, R essaie de cast avec as.list automatiquement
+retourne toujours une liste
+* sapply : idem lapply en essayant de simplifier le résultat
+* apply : apply a function over the margin of an array (X : Array, Margin : integer vector indicates which margins shoud be retains, F : fonction, ...)
+Exemple, sur une matrice m de 10 x 20
+ -> apply(m, 1, sum) fait la somme colonne par colonne (donc conserve les lignes)
+ -> apply(m, 2, sum) fait la somme ligne par ligne (donc conserve les colonnes)
+ 
+ rowSums, rowMeans, colSums, colMeans => fonctions optimisées
+
+* tapply : apply function over susbset of a vector
+* mapply : multivariate version of lapply
+
+La fonction split permet de segmenter un jeu de données. Par exemple pour segmenter un dataframe par mois :
+s <- split(airquality , airquality$Month)
+lapply(s, function(x) colMeans(x, [ , c("Ozone", "Solar Radiation")]))
+
+=> retourne une liste avec les valeurs moyennes par mois
+On peut splitter sur plusieurs niveaux en passant une list en argument à la place d'une valeur.
+Split appele automatiqueemnt la fonction "interaction" qui combine les éléments de différentes listes
+
+## Debugging
+
+traceback : print the call stack function
+debug : exectute les fonctions en mode debug
+browser : browser démarre la fonction debug à l'endroit ou il est appellé
+trace : permet d'ajouter du code pour le debugging à l'intérieur de fonction
+recover : permet de se trouver en mode débug au moment ou une erreur intervient (au lieu de stopper la fonction et de rendre la main)
