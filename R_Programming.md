@@ -198,3 +198,48 @@ debug : exectute les fonctions en mode debug
 browser : browser démarre la fonction debug à l'endroit ou il est appellé
 trace : permet d'ajouter du code pour le debugging à l'intérieur de fonction
 recover : permet de se trouver en mode débug au moment ou une erreur intervient (au lieu de stopper la fonction et de rendre la main)
+
+## Description de données
+La fonction summary() donne un apercu d'un jeu de données (valeurs manques, min, max, moyenne....)
+La fonction str() donne la structure d'un objet. Elle peut s'appliquer à tout (fonction, variables....)
+head retourne les premières lignes d'un jeu de données
+
+## Simulation et génération de jeux de données
+
+standard deviation = écart type
+
+ * rnorm : random normal variates with given mean and standard deviation
+ * rbinom : random binary variates
+ * dnorm : evaluate the normal probability density (with a given Mean/SD) at a point or vector of points
+ * pnorm : evaluate the cumulative distribution function for a normal distribution
+ * rpois : generates random poisson variates with a given rate
+ 
+ Les fonctions de distributions probabilistes vont généralement par 4 :
+  - d pour densité
+  - r pour génération aléatoiree
+  - p pour distribution cumulée
+  - q pour quantile
+  
+set.seed(<int>) permet de positionner le point de départ pour la génération de variables aléatoires.
+  
+sample permet de prendre un échantillon aléatoire d'un vecteur d'objets. replace = TRUE/FALSE indique s'il y a replacement de la donnée piochée.
+
+## Optimisation de code
+1. optimiser le code uniquement quand on a déjà un programme qui fonctionne (et qu'on rencontre des pb de performances)
+
+system.time() prend une expression en paramètre et retourne le temps écoulé pour l'exécuter.
+Le temps "user" est le temps de calcul CPU sur le PC (attention au multi cores)
+On peut mettre un ensemble de commande dans system.time en utilisant les crochets :
+system.time({
+n <- 10
+m <- n*30
+})
+<br>
+Rprof démarre le profiler de R
+Rprof récupère la pile d'appel des fonctions à intervalles de temps régulier et l'enregistre (par défaut tous les 0.02 secondes)
+
+summaryRprof donne un résumé synthétique et lisible des données du profiler
+$byTotal donne le temps pour les fonctions de niveau principal (les sous fonctions ne sont pas détaillées)
+$bySelf donne le temps réellement écoulé pour l'execution d'une fonction. Donne une vision plus précise du temps passé dans chaque fonction / sous fonction
+$sample.interval affiche le pas de temps de Rprof
+$sampling.time affiche le temps total d'execution
