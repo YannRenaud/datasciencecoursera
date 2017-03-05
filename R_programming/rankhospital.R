@@ -1,4 +1,4 @@
-best <- function(state, outcome) {
+rankhospital <- function(state, outcome, num = "best") {
      
      library('dplyr')
      
@@ -12,26 +12,33 @@ best <- function(state, outcome) {
      
      ## Read outcome data
      outcome_df <- read.csv(paste(home_path, "outcome-of-care-measures.csv", sep = ""), colClasses = "character", na.strings="Not Available" , stringsAsFactors=FALSE)
-
+     
      ## Check that state and outcome are valid
      state_ok <- state %in% outcome_df$State
      if(!state_ok) stop("invalid state")
      
      outcome_col <- deseases[outcome]
      if(is.na(outcome_col)) stop("invalid outcome")
-
+     
      ## work with simplified dataframe
      outcome_s <- outcome_df[c(2, 7, outcome_col)]
      colnames(outcome_s) <- c("hospital", "us_state", "rate")
-
+     
+     # exclude na values
+     outcome_s <- outcome_s[!(is.na(outcome_s$rate)),]
+     
      ## Convert outcome column in numeric
      outcome_s$rate <- as.numeric(outcome_s$rate)
      
-     # Get the result using Dplyr (filter on state and rate not NA, then summarise with min function on the rate )
+     ## Return hospital name in that state with the given rank
      result <- outcome_s %>% 
-                    filter(us_state == state & rate != 'NA') %>%
-                    filter(rate == min(rate))
+          filter(us_state == state) %>%
+          arrange(rate, hospital)
      
-     result$hospital
+     ## Deal with num argument
+     if(num == 'best') num <- 1
+     if(num == 'worst') num <- nrow(result)
      
+     ## 30-day death rate
+     result$hospital[num]
 }
