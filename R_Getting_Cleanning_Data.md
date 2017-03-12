@@ -33,4 +33,54 @@ Exemples :
 xpathSApply(rootNode, "//name", xmlValue) : retourne la liste des valeurs pour la balise name <br>
 xpathSApply(rootNode, "//price", xmlValue) : retourne la liste des valeurs pour la balise price <br>
 
+<br>
 
+### JSON Files
+library("jsonlite") <br> 
+jsondata <- fromJSON("http://xxxx/file.json")  <br> 
+names(jsondata)  <br> 
+names(jsondata$field) => nom des champs du sous ensemble
+jsondata$fied1$field2 => valeur de l'élement field2 du sous ensemble field1
+
+myjson <- toJSON(dataframe, pretty = TRUE)
+iris2 <- fromJSON(myjson) => retourne un data frame
+
+https://cran.r-project.org/web/packages/jsonlite/vignettes/json-aaquickstart.html
+
+### Package Data.Table
+
+library(data.table)
+
+DT <- data.table (....) => construction idem data frame
+tables() > listes toutes les datatables en mémoire
+
+Quand on extrait un sous ensemble avec un seul index, il prend les lignes spécifiées
+
+Calcul de fonctions :
+DT[, list(mean(x), sum(z))] retourne une liste à deux entrée avec la moyenne de la colonne x et la somme de la colonne z.
+
+Ajouter une nouvelle colonne :
+DT[, x:=z^2]
+
+Copie de DataTable :
+DT2 <- DT 
+/!\ ca créé un pointeur DT2 vers DT mais ça ne recopie pas les données.
+
+Opérations multiples :
+DT[, m:= {tmp <- (x+z) ; log2(tmp+5) }]
+
+PLYR like opérations : 
+DT[, a:= x>0] <br>
+DT[, b:= mean(x+y) , by = a] => sommes les variables x et y regroupées par a (true ou false) <br>
+
+Variables spéciales 
+par exemple .N => compte le nombre d'occurences <br>
+DT[, .N, by = x] => compte le nombre d'occurences de chaque élément x <br>
+
+Keys
+la fonction setkey(datatable, column) permet de déclarer une clé et donc indexé les données sur ce champs. <br>
+Cela permet d'optimiser les temps de traitements <br>
+Les clés permettent aussi de faciliter les jointures <br>
+setkey(DT1, x) <br>
+setkey(DT2, x) <br>
+merge(DT1, DT2) <br>
