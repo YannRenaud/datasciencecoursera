@@ -84,3 +84,30 @@ Les clés permettent aussi de faciliter les jointures <br>
 setkey(DT1, x) <br>
 setkey(DT2, x) <br>
 merge(DT1, DT2) <br>
+
+### Lecture de MySQL
+
+Connexion à la base : myCnx <- dbConnect(MySQL(), user=" ", db=" ", host=" ")
+Requêter la base : dbGetQuery(myCnx, "my query;")
+Liste tables : dbListTables(myCnx)
+Listes champs : dbListFields(myCnx, "Table")
+Créer un data.table à partir un select * : dbReadTable(myCnx, "Table")
+Pour les grosses requêtes : myQuery <- dbSendQuery(myCnx, "query") ; data <- fetch(query [, n=10]) ; dbClearResult(myQuery)
+Fermeture de connexion : dbDisconnect(myCnx)
+
+### Lecture de pages Web
+
+con <- url("my url)
+htmlLines <- readLines(con)
+
+Deuxième méthode : 
+Package (httr)
+  html2 <- get("url")
+  content2 <- content(html2, as="text")
+  parsedHTML <- parseHTML(Content2, asText=TRUE)
+
+Avec la commande Handle, on conserve l'authentification et les cookies dans notre session.
+
+
+Httr propose les requetes GET, PUT, DELETE, POST
+
