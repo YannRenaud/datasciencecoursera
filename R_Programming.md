@@ -80,6 +80,20 @@ Par défaut, quand on sélectionne un seul élément d'une matrice, ça retourne
 
 Recherche approximative à partir des noms => exact = FALSE
 
+## Basique subseting
+x[,1] => 1ère colonne
+x[,"var1"] => colonne "var1"
+X[1:2, "var2"] => lignes 1 et 2 de la colonne "var2"
+
+X[(X$var1 > 3 & X$var2 <= 11),] => toutes les lignes avec var1 > 3 et var2 <= 11
+
+X[(X$var1 > 3 | X$var2 <= 11),] => toutes les lignes avec var1 > 3 ou var2 <= 11
+
+X[which(X$var1 > 3),] => élimine les "NA"
+
+## Tier un dataframe 
+X[sort(X$var1),] => trie sur la colonne var1
+
 Supprimer les valeurs vides 
 > x <- c(1, 2, 3, NA, 4, NA, 5) <br/>
 > bad <- is.na(x) <br/>
@@ -203,6 +217,21 @@ recover : permet de se trouver en mode débug au moment ou une erreur intervient
 La fonction summary() donne un apercu d'un jeu de données (valeurs manques, min, max, moyenne....)
 La fonction str() donne la structure d'un objet. Elle peut s'appliquer à tout (fonction, variables....)
 head retourne les premières lignes d'un jeu de données
+tail retourne les dernières lignes
+quantile donne les quantiles des données (25% 50% etc...)
+table donne la répartition des valeurs pour une colonne donnée ou table sur deux colonnes
+
+Vérifier les valeurs vides : 
+sum(is.na("col"))
+any(is.na("col"))
+all("col" > 0 )
+
+colSums(is.na("dataframe")) => donne le nombre de NA par colonne
+
+table(df$col %in% c("val1", "val2"))
+
+Sous ensemble de data frame
+df[df$col %in% c("val1", "val2"),]
 
 ## Simulation et génération de jeux de données
 
