@@ -111,3 +111,9 @@ Avec la commande Handle, on conserve l'authentification et les cookies dans notr
 
 Httr propose les requetes GET, PUT, DELETE, POST
 
+### Creation de variables
+df$new_col <- ifelse(df$col < 0, TRUE, FALSE)
+df$new_col <- cut(df$col, breaks=quantile(df$col))
+
+
+
